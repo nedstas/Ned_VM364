@@ -1,0 +1,41 @@
+# How To Piss
+
+## Introduction
+	_Jorb and I are working on a game together. 
+	The game is about aggressive masculinity and its destructive qualities displayed through Brechtian tactics. 
+	The main mechanic is peeing. The player is tasked with peeing on as much artwork as possible before the timer runs out.
+	Jorb is working on the timer and point scoring while I work on the bee and physics._
+
+
+### First Draft
+
+  _We first thought about using a particle emitter for the pee, to make it emulate a fluid. This proved to be a little too
+  complex._
+  
+#### Second Draft
+
+ _ The next idea we had was to have many spheroids fire rapidly to emulate piss while also being able to collide with meshes in the world. I made a sphere and gave it a rigidbody and a sphere collider, then dragged it out into the editor to make it a prefab. I then modified code from game designer Alan Markarian, just a little. Here is the code _
+  
+  
+#pragma strict
+var Piss : Rigidbody;
+var Speed = 30;
+
+function Update () {
+	if (Input.GetMouseButton(0))
+	{
+		var clone = Instantiate(Piss, transform.position, transform.rotation);
+		clone.velocity = transform.TransformDirection(Vector3(0, -5, Speed));
+		
+		Destroy (clone.gameObject, 3);
+	}
+}
+  
+**This code allows** the sphere to create clones of itself in rapid succession. The Vector3 is X,Y,Z. The Z is replaced with a speed variable of 30, to make it fly super duper fast. GetMouseButton was derived from GetMouseButtonDown, an idea I got from [here](http://answers.unity3d.com/questions/33974/rapid-fire-script.html)
+
+This change allows the pee to keep on spraying as long as the mouse button is held down for. 
+
+## Let There Be Pee, My Dude!
+![](http://imgur.com/Caj0LY0)
+  
+The next step is to figure out how to fix the mesh of the gallery so that the spheres collide with it more than they go through it. The results are about 50/50 as is.
